@@ -1,0 +1,15 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+app.swagger_ui:
+    resource: "@NelmioApiDocBundle/Resources/config/routing/swaggerui.xml"
+    prefix:   /
+
+materias:
+    type: rest
+    resource: AppBundle\Controller\MateriaController
+
+Cuatrimestre:
+    type: rest
+    resource: AppBundle\Controller\CuatrimestreController

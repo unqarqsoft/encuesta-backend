@@ -1,0 +1,16 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Encuesta Backend
+            description: API REST sistema de encuestas
+            version: 1.0.0
+    routes:
+        path_patterns:
+            - ^(?!/_|/$)
+
+fos_rest:
+    view:
+        jsonp_handler: ~
+    routing_loader:
+        include_format: false
+        default_format: json
