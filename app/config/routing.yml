@@ -10,6 +10,18 @@ materias:
     type: rest
     resource: AppBundle\Controller\MateriaController
 
-Cuatrimestre:
+cuatrimestre:
     type: rest
     resource: AppBundle\Controller\CuatrimestreController
+
+comision:
+    type: rest
+    resource: AppBundle\Controller\ComisionController
+
+oferta:
+    type: rest
+    resource: AppBundle\Controller\OfertaController
+
+alumno:
+    type: rest
+    resource: AppBundle\Controller\AlumnoController
