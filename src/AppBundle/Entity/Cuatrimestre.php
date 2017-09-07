@@ -46,6 +46,12 @@ class Cuatrimestre
      */
     private $periodo;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Carrera")
+     * @Assert\NotBlank()
+     */
+    private $carrera;
+
 
     /**
      * Get id
@@ -127,5 +133,29 @@ class Cuatrimestre
     public function getPeriodo()
     {
         return $this->periodo;
+    }
+
+    /**
+     * Set carrera
+     *
+     * @param \AppBundle\Entity\Carrera $carrera
+     *
+     * @return Cuatrimestre
+     */
+    public function setCarrera(\AppBundle\Entity\Carrera $carrera = null)
+    {
+        $this->carrera = $carrera;
+
+        return $this;
+    }
+
+    /**
+     * Get carrera
+     *
+     * @return \AppBundle\Entity\Carrera
+     */
+    public function getCarrera()
+    {
+        return $this->carrera;
     }
 }

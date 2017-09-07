@@ -25,3 +25,7 @@ oferta:
 alumno:
     type: rest
     resource: AppBundle\Controller\AlumnoController
+
+carrera:
+    type: rest
+    resource: AppBundle\Controller\CarreraController
