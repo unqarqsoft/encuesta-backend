@@ -8,16 +8,6 @@ use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 
 class CuatrimestreControllerTest extends WebTestCase
 {
-    public function setUp()
-    {
-        self::bootKernel();
-
-        $em = self::$kernel->getContainer()->get('doctrine')->getManager();
-        $purger = new ORMPurger($em);
-        $executor = new ORMExecutor($em, $purger);
-        $executor->execute([]);
-    }
-
     public function testPostMateria()
     {
         $client = static::createClient();

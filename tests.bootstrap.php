@@ -1,7 +1,12 @@
 <?php
 
-passthru(sprintf(
-    'php "%s/console" doctrine:schema:update --force --env=test --no-warmup',
+echo passthru(sprintf(
+    'php "%s/bin/console" doctrine:schema:update --force --env=test',
+    __DIR__
+));
+
+echo passthru(sprintf(
+    'php "%s/bin/console" doctrine:fixtures:load --no-interaction --env=test',
     __DIR__
 ));
 
