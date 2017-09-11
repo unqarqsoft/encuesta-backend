@@ -2,19 +2,20 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\Materia;
 
-class LoadMateriaData implements FixtureInterface
+class MateriaFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        foreach ($this->getMaterias() as $mat) {
+        foreach ($this->getMaterias() as $key => $mat) {
             $materia = new Materia();
             $materia->setNombre($mat['nombre']);
             $materia->setNucleo($mat['nucleo']);
 
+            $this->addReference("materia$key", $materia);
             $manager->persist($materia);
         }
 
