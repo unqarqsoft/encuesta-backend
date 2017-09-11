@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Alumno
@@ -53,6 +54,10 @@ class Alumno
      */
     private $token;
 
+    public function __construct()
+    {
+        $this->token = Uuid::uuid4();
+    }
 
     /**
      * Get id

@@ -33,7 +33,7 @@ class Oferta
     private $cuatrimestre;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comision",  mappedBy="oferta")
+     * @ORM\OneToMany(targetEntity="Comision",  mappedBy="oferta", cascade={"persist"})
      */
     private $comisiones;
 
@@ -50,5 +50,87 @@ class Oferta
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set materia
+     *
+     * @param \AppBundle\Entity\Materia $materia
+     *
+     * @return Oferta
+     */
+    public function setMateria(\AppBundle\Entity\Materia $materia = null)
+    {
+        $this->materia = $materia;
+
+        return $this;
+    }
+
+    /**
+     * Get materia
+     *
+     * @return \AppBundle\Entity\Materia
+     */
+    public function getMateria()
+    {
+        return $this->materia;
+    }
+
+    /**
+     * Set cuatrimestre
+     *
+     * @param \AppBundle\Entity\Cuatrimestre $cuatrimestre
+     *
+     * @return Oferta
+     */
+    public function setCuatrimestre(\AppBundle\Entity\Cuatrimestre $cuatrimestre = null)
+    {
+        $this->cuatrimestre = $cuatrimestre;
+
+        return $this;
+    }
+
+    /**
+     * Get cuatrimestre
+     *
+     * @return \AppBundle\Entity\Cuatrimestre
+     */
+    public function getCuatrimestre()
+    {
+        return $this->cuatrimestre;
+    }
+
+    /**
+     * Add comision
+     *
+     * @param \AppBundle\Entity\Comision $comision
+     *
+     * @return Oferta
+     */
+    public function addComision(\AppBundle\Entity\Comision $comisione)
+    {
+        $this->comisiones[] = $comisione;
+
+        return $this;
+    }
+
+    /**
+     * Remove comision
+     *
+     * @param \AppBundle\Entity\Comision $comision
+     */
+    public function removeComision(\AppBundle\Entity\Comision $comisione)
+    {
+        $this->comisiones->removeElement($comisione);
+    }
+
+    /**
+     * Get comisiones
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComisiones()
+    {
+        return $this->comisiones;
     }
 }

@@ -29,3 +29,7 @@ alumno:
 carrera:
     type: rest
     resource: AppBundle\Controller\CarreraController
+
+encuesta:
+    type: rest
+    resource: AppBundle\Controller\EncuestaController
