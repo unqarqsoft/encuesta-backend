@@ -16,4 +16,11 @@ class CarreraController extends AbstractRestController
     {
         return CarreraType::class;
     }
+
+    public function getCuatrimestresAction($id)
+    {
+        $view = $this->view($this->getEntity()->getCuatrimestres());
+
+        return $this->handleView($view);
+    }
 }

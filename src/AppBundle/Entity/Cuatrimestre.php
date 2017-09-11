@@ -47,11 +47,10 @@ class Cuatrimestre
     private $periodo;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Carrera")
+     * @ORM\ManyToOne(targetEntity="Carrera", inversedBy="cuatrimestres")
      * @Assert\NotBlank()
      */
     private $carrera;
-
 
     /**
      * Get id

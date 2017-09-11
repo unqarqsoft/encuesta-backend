@@ -28,6 +28,18 @@ class Carrera
      */
     private $nombre;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Cuatrimestre", mappedBy="carrera")
+     */
+    private $cuatrimestres;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->cuatrimestres = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -62,5 +74,38 @@ class Carrera
     {
         return $this->nombre;
     }
-}
 
+    /**
+     * Add cuatrimestre
+     *
+     * @param \AppBundle\Entity\Cuatrimestre $cuatrimestre
+     *
+     * @return Carrera
+     */
+    public function addCuatrimestre(\AppBundle\Entity\Cuatrimestre $cuatrimestre)
+    {
+        $this->cuatrimestres[] = $cuatrimestre;
+
+        return $this;
+    }
+
+    /**
+     * Remove cuatrimestre
+     *
+     * @param \AppBundle\Entity\Cuatrimestre $cuatrimestre
+     */
+    public function removeCuatrimestre(\AppBundle\Entity\Cuatrimestre $cuatrimestre)
+    {
+        $this->cuatrimestres->removeElement($cuatrimestre);
+    }
+
+    /**
+     * Get cuatrimestres
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCuatrimestres()
+    {
+        return $this->cuatrimestres;
+    }
+}
