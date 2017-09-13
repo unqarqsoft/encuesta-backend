@@ -28,12 +28,12 @@ class Oferta
     private $materia;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cuatrimestre")
+     * @ORM\ManyToOne(targetEntity="Cuatrimestre", inversedBy="ofertas")
      */
     private $cuatrimestre;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comision",  mappedBy="oferta", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Comision", mappedBy="oferta", cascade={"persist"})
      */
     private $comisiones;
 

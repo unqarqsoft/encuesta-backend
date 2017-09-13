@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Encuesta
@@ -31,11 +32,13 @@ class Encuesta
 
     /**
      * @ORM\ManyToOne(targetEntity="Cuatrimestre")
+     * @Assert\NotBlank()
      */
     private $cuatrimestre;
 
     /**
      * @ORM\ManyToOne(targetEntity="Alumno")
+     * @Assert\NotBlank()
      */
     private $alumno;
 

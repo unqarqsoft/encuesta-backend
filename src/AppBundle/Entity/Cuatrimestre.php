@@ -53,6 +53,19 @@ class Cuatrimestre
     private $carrera;
 
     /**
+     * @ORM\OneToMany(targetEntity="Oferta", mappedBy="cuatrimestre")
+     */
+    private $ofertas;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ofertas = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
      * Get id
      *
      * @return int
@@ -156,5 +169,39 @@ class Cuatrimestre
     public function getCarrera()
     {
         return $this->carrera;
+    }
+
+    /**
+     * Add oferta
+     *
+     * @param \AppBundle\Entity\Oferta $oferta
+     *
+     * @return Cuatrimestre
+     */
+    public function addOferta(\AppBundle\Entity\Oferta $oferta)
+    {
+        $this->ofertas[] = $oferta;
+
+        return $this;
+    }
+
+    /**
+     * Remove oferta
+     *
+     * @param \AppBundle\Entity\Oferta $oferta
+     */
+    public function removeOferta(\AppBundle\Entity\Oferta $oferta)
+    {
+        $this->ofertas->removeElement($oferta);
+    }
+
+    /**
+     * Get ofertas
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOfertas()
+    {
+        return $this->ofertas;
     }
 }

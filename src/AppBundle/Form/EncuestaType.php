@@ -13,9 +13,9 @@ class EncuestaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('token')->add('cuatrimestre')->add('alumno');
+        $builder->add('cuatrimestre')->add('alumno');
     }
-    
+
     /**
      * {@inheritdoc}
      */
