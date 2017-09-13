@@ -11,12 +11,12 @@ class CarreraFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $carrera = new Carrera();
-        $carrera->setNombre('TPI');
+        $carrera->setNombre('Tecnicatura Universitaria en Programación Informática');
         $this->addReference('carrera-tpi', $carrera);
         $manager->persist($carrera);
 
         $carrera = new Carrera();
-        $carrera->setNombre('LDS');
+        $carrera->setNombre('Licenciatura en Informática');
         $this->addReference('carrera-lds', $carrera);
         $manager->persist($carrera);
 

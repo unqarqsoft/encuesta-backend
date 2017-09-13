@@ -66,4 +66,28 @@ class Comision
     {
         return $this->descripcion;
     }
+
+    /**
+     * Set oferta
+     *
+     * @param \AppBundle\Entity\Oferta $oferta
+     *
+     * @return Comision
+     */
+    public function setOferta(\AppBundle\Entity\Oferta $oferta = null)
+    {
+        $this->oferta = $oferta;
+
+        return $this;
+    }
+
+    /**
+     * Get oferta
+     *
+     * @return \AppBundle\Entity\Oferta
+     */
+    public function getOferta()
+    {
+        return $this->oferta;
+    }
 }

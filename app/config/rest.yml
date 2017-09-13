@@ -1,3 +1,7 @@
+nelmio_cors:
+    defaults:
+        allow_origin: '*'
+
 nelmio_api_doc:
     documentation:
         info:
