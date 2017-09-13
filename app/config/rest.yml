@@ -15,6 +15,10 @@ nelmio_api_doc:
 fos_rest:
     view:
         jsonp_handler: ~
+    format_listener:
+        enabled: true
+        rules:
+            - { path: '^/', priorities: ['json'] }
     routing_loader:
         include_format: false
         default_format: json

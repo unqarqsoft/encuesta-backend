@@ -17,6 +17,12 @@ abstract class AbstractRestController extends FOSRestController implements Class
         return $this->getDoctrine()->getRepository($this->getResourceClass())->find($id);
     }
 
+    protected function getRepository($class)
+    {
+        return $this->getDoctrine()->getRepository($class);
+    }
+
+
     public function cgetAction()
     {
         $data = $this->getDoctrine()->getRepository($this->getResourceClass())->findAll();
