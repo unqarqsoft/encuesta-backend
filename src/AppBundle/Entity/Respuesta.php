@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Respuesta
@@ -29,8 +30,15 @@ class Respuesta
      * @var string
      *
      * @ORM\Column(name="respuesta", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $respuesta;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Materia")
+     * @Assert\NotBlank()
+     */
+    private $materia;
 
     /**
      * @ORM\ManyToOne(targetEntity="Comision")
@@ -40,6 +48,7 @@ class Respuesta
 
     /**
      * @ORM\ManyToOne(targetEntity="Encuesta", inversedBy="respuestas")
+     * @Assert\NotBlank()
      */
     private $encuesta;
 
@@ -123,5 +132,29 @@ class Respuesta
     public function getEncuesta()
     {
         return $this->encuesta;
+    }
+
+    /**
+     * Set materia
+     *
+     * @param \AppBundle\Entity\Materia $materia
+     *
+     * @return Respuesta
+     */
+    public function setMateria(\AppBundle\Entity\Materia $materia = null)
+    {
+        $this->materia = $materia;
+
+        return $this;
+    }
+
+    /**
+     * Get materia
+     *
+     * @return \AppBundle\Entity\Materia
+     */
+    public function getMateria()
+    {
+        return $this->materia;
     }
 }

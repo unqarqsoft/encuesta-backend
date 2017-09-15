@@ -43,7 +43,8 @@ class Encuesta
     private $alumno;
 
     /**
-     * @ORM\OneToMany(targetEntity="Respuesta", mappedBy="encuesta")
+     * @ORM\OneToMany(targetEntity="Respuesta", mappedBy="encuesta", cascade={"persist", "remove"})
+     * @Assert\Valid
      */
     private $respuestas;
 
@@ -144,6 +145,7 @@ class Encuesta
      */
     public function addRespuesta(\AppBundle\Entity\Respuesta $respuesta)
     {
+        $respuesta->setEncuesta($this);
         $this->respuestas[] = $respuesta;
 
         return $this;
