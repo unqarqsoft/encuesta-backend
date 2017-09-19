@@ -20,3 +20,13 @@ monolog:
         console:
             type: console
             process_psr_3_messages: false
+
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        host: '%env(DATABASE_HOST)%'
+        port: '%database_port%'
+        dbname: '%env(DATABASE_NAME)%'
+        user: '%env(DATABASE_USER)%'
+        password: '%env(DATABASE_PASSWORD)%'
+        charset: UTF8
