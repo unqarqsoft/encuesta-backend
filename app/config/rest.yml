@@ -18,6 +18,7 @@ nelmio_api_doc:
             - ^(?!/_|/$)
 
 fos_rest:
+    param_fetcher_listener: true
     view:
         jsonp_handler: ~
     format_listener:
