@@ -166,6 +166,23 @@ class Comision
     }
 
     /**
+     * @VirtualProperty
+     * @Groups({"stats"})
+     */
+    public function getStatus()
+    {
+        $total = $this->getTotal();
+        if ($total < $this->cupoMinimo) {
+            return 'BAJA';
+        }
+        if ($total > $this->cupoMaximo) {
+            return 'ALTA';
+        }
+
+        return 'OK';
+    }
+
+    /**
      * Set cupoMinimo
      *
      * @param integer $cupoMinimo

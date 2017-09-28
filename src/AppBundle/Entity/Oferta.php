@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
  * Oferta
@@ -135,5 +136,19 @@ class Oferta
     public function getComisiones()
     {
         return $this->comisiones;
+    }
+
+    /**
+     * @VirtualProperty
+     * @Groups({"stats"})
+     */
+    public function getTotal()
+    {
+        $sum = 0;
+        foreach ($this->getComisiones() as $comision) {
+            $sum += $comision->getTotal();
+        }
+
+        return $sum;
     }
 }
