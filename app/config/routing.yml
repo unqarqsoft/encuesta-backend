@@ -33,3 +33,7 @@ carrera:
 encuesta:
     type: rest
     resource: AppBundle\Controller\EncuestaController
+
+estadistica:
+    type: rest
+    resource: AppBundle\Controller\EstadisticaController

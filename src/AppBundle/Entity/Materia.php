@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Materia
@@ -29,6 +30,7 @@ class Materia
      *
      * @ORM\Column(name="nombre", type="string", length=255, unique=true)
      * @Assert\NotBlank()
+     * @Groups({"stats"})
      */
     private $nombre;
 
@@ -37,6 +39,7 @@ class Materia
      *
      * @ORM\Column(name="nucleo", type="string", length=255)
      * @Assert\NotBlank()
+     * @Groups({"stats"})
      */
     private $nucleo;
 

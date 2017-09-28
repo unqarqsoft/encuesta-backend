@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
  * Encuesta
@@ -169,5 +170,13 @@ class Encuesta
     public function getRespuestas()
     {
         return $this->respuestas;
+    }
+
+    /**
+     * @VirtualProperty
+     */
+    public function getCompleta()
+    {
+        return count($this->respuestas) == count($this->cuatrimestre->getOfertas());
     }
 }

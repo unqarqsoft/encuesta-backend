@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Oferta
@@ -24,6 +25,7 @@ class Oferta
 
     /**
      * @ORM\ManyToOne(targetEntity="Materia")
+     * @Groups({"stats"})
      */
     private $materia;
 
@@ -34,6 +36,7 @@ class Oferta
 
     /**
      * @ORM\OneToMany(targetEntity="Comision", mappedBy="oferta", cascade={"persist"})
+     * @Groups({"stats"})
      */
     private $comisiones;
 

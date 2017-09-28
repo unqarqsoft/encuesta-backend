@@ -3,6 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Exclude;
+use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Comision
@@ -25,13 +28,41 @@ class Comision
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", length=255)
+     * @Groups({"stats"})
      */
     private $descripcion;
 
     /**
      * @ORM\ManyToOne(targetEntity="Oferta", inversedBy="comisiones")
+     * @Exclude
      */
     private $oferta;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Respuesta", mappedBy="comision")
+     * @Exclude
+     */
+    private $respuestas;
+
+    /**
+     * @ORM\Column(name="cupo_minimo", type="integer")
+     * @Groups({"stats"})
+     */
+    private $cupoMinimo;
+
+    /**
+     * @ORM\Column(name="cupo_maximo", type="integer")
+     * @Groups({"stats"})
+     */
+    private $cupoMaximo;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->respuestas = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -89,5 +120,96 @@ class Comision
     public function getOferta()
     {
         return $this->oferta;
+    }
+
+    /**
+     * Add respuesta
+     *
+     * @param \AppBundle\Entity\Respuesta $respuesta
+     *
+     * @return Comision
+     */
+    public function addRespuesta(\AppBundle\Entity\Respuesta $respuesta)
+    {
+        $this->respuestas[] = $respuesta;
+
+        return $this;
+    }
+
+    /**
+     * Remove respuesta
+     *
+     * @param \AppBundle\Entity\Respuesta $respuesta
+     */
+    public function removeRespuesta(\AppBundle\Entity\Respuesta $respuesta)
+    {
+        $this->respuestas->removeElement($respuesta);
+    }
+
+    /**
+     * Get respuestas
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRespuestas()
+    {
+        return $this->respuestas;
+    }
+
+    /**
+     * @VirtualProperty
+     * @Groups({"stats"})
+     */
+    public function getTotal()
+    {
+        return count($this->respuestas);
+    }
+
+    /**
+     * Set cupoMinimo
+     *
+     * @param integer $cupoMinimo
+     *
+     * @return Comision
+     */
+    public function setCupoMinimo($cupoMinimo)
+    {
+        $this->cupoMinimo = $cupoMinimo;
+
+        return $this;
+    }
+
+    /**
+     * Get cupoMinimo
+     *
+     * @return integer
+     */
+    public function getCupoMinimo()
+    {
+        return $this->cupoMinimo;
+    }
+
+    /**
+     * Set cupoMaximo
+     *
+     * @param integer $cupoMaximo
+     *
+     * @return Comision
+     */
+    public function setCupoMaximo($cupoMaximo)
+    {
+        $this->cupoMaximo = $cupoMaximo;
+
+        return $this;
+    }
+
+    /**
+     * Get cupoMaximo
+     *
+     * @return integer
+     */
+    public function getCupoMaximo()
+    {
+        return $this->cupoMaximo;
     }
 }

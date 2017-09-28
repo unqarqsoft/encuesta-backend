@@ -41,7 +41,7 @@ class Respuesta
     private $materia;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Comision")
+     * @ORM\ManyToOne(targetEntity="Comision", inversedBy="respuestas")
      * @ORM\JoinColumn(nullable=true)
      */
     private $comision;
