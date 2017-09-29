@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Ramsey\Uuid\Uuid;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Alumno
@@ -20,6 +21,8 @@ class Alumno
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @JMS\Groups({"list"})
      */
     private $id;
 
@@ -28,6 +31,8 @@ class Alumno
      *
      * @ORM\Column(name="nombre", type="string", length=255)
      * @Assert\NotBlank()
+     *
+     * @JMS\Groups({"list"})
      */
     private $nombre;
 
@@ -36,6 +41,8 @@ class Alumno
      *
      * @ORM\Column(name="apellido", type="string", length=255)
      * @Assert\NotBlank()
+     *
+     * @JMS\Groups({"list"})
      */
     private $apellido;
 
@@ -44,6 +51,8 @@ class Alumno
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
      * @Assert\NotBlank()
+     *
+     * @JMS\Groups({"list"})
      */
     private $email;
 

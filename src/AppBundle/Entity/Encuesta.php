@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Encuesta
@@ -21,6 +22,8 @@ class Encuesta
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Groups({"list"})
      */
     private $id;
 
@@ -28,24 +31,32 @@ class Encuesta
      * @var string
      *
      * @ORM\Column(name="token", type="string", length=255, unique=true)
+     *
+     * @Groups({"list"})
      */
     private $token;
 
     /**
      * @ORM\ManyToOne(targetEntity="Cuatrimestre")
      * @Assert\NotBlank()
+     *
+     * @Groups({"list"})
      */
     private $cuatrimestre;
 
     /**
      * @ORM\ManyToOne(targetEntity="Alumno")
      * @Assert\NotBlank()
+     *
+     * @Groups({"list"})
      */
     private $alumno;
 
     /**
      * @ORM\OneToMany(targetEntity="Respuesta", mappedBy="encuesta", cascade={"persist", "remove"})
      * @Assert\Valid
+     *
+     * @Groups({"list"})
      */
     private $respuestas;
 

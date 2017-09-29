@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Respuesta
@@ -24,6 +25,8 @@ class Respuesta
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Groups({"list"})
      */
     private $id;
 
@@ -32,18 +35,24 @@ class Respuesta
      *
      * @ORM\Column(name="respuesta", type="string", length=255)
      * @Assert\NotBlank()
+     *
+     * @Groups({"list"})
      */
     private $respuesta;
 
     /**
      * @ORM\ManyToOne(targetEntity="Materia")
      * @Assert\NotBlank()
+     *
+     * @Groups({"list"})
      */
     private $materia;
 
     /**
      * @ORM\ManyToOne(targetEntity="Comision", inversedBy="respuestas")
      * @ORM\JoinColumn(nullable=true)
+     *
+     * @Groups({"list"})
      */
     private $comision;
 

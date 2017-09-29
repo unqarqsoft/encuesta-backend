@@ -6,6 +6,7 @@ use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\RequestParam;
 use FOS\RestBundle\Request\ParamFetcher;
+use FOS\RestBundle\Context\Context;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Encuesta;
 use AppBundle\Entity\Cuatrimestre;
@@ -23,6 +24,18 @@ class EncuestaController extends AbstractRestController
     protected function getFormClass()
     {
         return EncuestaType::class;
+    }
+
+    public function cgetAction()
+    {
+        $data = $this->getDoctrine()->getRepository($this->getResourceClass())->findAll();
+        $view = $this->view($data);
+
+        $context = new Context();
+        $context->addGroup('list');
+        $view->setContext($context);
+
+        return $this->handleView($view);
     }
 
     /**

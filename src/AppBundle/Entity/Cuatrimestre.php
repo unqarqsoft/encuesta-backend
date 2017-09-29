@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Cuatrimestre
@@ -19,6 +20,8 @@ class Cuatrimestre
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Groups({"list"})
      */
     private $id;
 
@@ -27,6 +30,8 @@ class Cuatrimestre
      *
      * @ORM\Column(name="descripcion", type="string", length=255)
      * @Assert\NotBlank()
+     *
+     * @Groups({"list"})
      */
     private $descripcion;
 
@@ -49,6 +54,8 @@ class Cuatrimestre
     /**
      * @ORM\ManyToOne(targetEntity="Carrera", inversedBy="cuatrimestres")
      * @Assert\NotBlank()
+     *
+     * @Groups({"list"})
      */
     private $carrera;
 
@@ -64,7 +71,7 @@ class Cuatrimestre
     {
         $this->ofertas = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *

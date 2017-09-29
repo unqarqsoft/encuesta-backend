@@ -28,7 +28,7 @@ class Comision
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", length=255)
-     * @Groups({"stats"})
+     * @Groups({"stats", "list"})
      */
     private $descripcion;
 

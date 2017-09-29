@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Carrera
@@ -18,6 +19,8 @@ class Carrera
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @JMS\Groups({"list"})
      */
     private $id;
 
@@ -25,6 +28,8 @@ class Carrera
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255)
+     *
+     * @JMS\Groups({"list"})
      */
     private $nombre;
 

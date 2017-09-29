@@ -30,7 +30,7 @@ class Materia
      *
      * @ORM\Column(name="nombre", type="string", length=255, unique=true)
      * @Assert\NotBlank()
-     * @Groups({"stats"})
+     * @Groups({"stats", "list"})
      */
     private $nombre;
 
@@ -39,7 +39,7 @@ class Materia
      *
      * @ORM\Column(name="nucleo", type="string", length=255)
      * @Assert\NotBlank()
-     * @Groups({"stats"})
+     * @Groups({"stats", "list"})
      */
     private $nucleo;
 
