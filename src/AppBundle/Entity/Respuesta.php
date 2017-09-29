@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Respuesta
 {
+    const APROBADA = 'APROBADA';
     const NO_CURSA = 'NO_CURSA';
     const NO_HORARIO = 'NO_HORARIO';
     const COMISION = 'COMISION';

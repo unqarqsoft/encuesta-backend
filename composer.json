@@ -29,6 +29,7 @@
         "jms/serializer-bundle": "^2.1",
         "nelmio/api-doc-bundle": "dev-master",
         "nelmio/cors-bundle": "^1.5",
+        "nubs/random-name-generator": "^2.1",
         "ramsey/uuid": "^3.7",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^3.0.2",

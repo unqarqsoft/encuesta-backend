@@ -19,7 +19,7 @@ class OfertaFixtures extends Fixture
             $this->addComisiones($oferta);
             $manager->persist($oferta);
         }
-        
+
         $manager->flush();
     }
 
@@ -29,6 +29,8 @@ class OfertaFixtures extends Fixture
             $comision = new Comision();
             $comision->setDescripcion("Comision $i");
             $comision->setOferta($oferta);
+            $comision->setCupoMinimo(5);
+            $comision->setCupoMaximo(25);
             $oferta->addComision($comision);
         }
     }

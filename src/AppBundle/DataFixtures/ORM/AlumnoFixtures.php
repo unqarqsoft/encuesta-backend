@@ -10,12 +10,19 @@ class AlumnoFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $alumno = new Alumno();
-        $alumno->setNombre('Hernan');
-        $alumno->setApellido('Slavich');
-        $alumno->setEmail('hernan.slavich@gmail.com');
+        $generator = new \Nubs\RandomNameGenerator\Alliteration();
 
-        $manager->persist($alumno);
+        for ($i=1; $i <= 100; $i++) {
+            list($nombre, $apellido) = explode(' ', $generator->getName());
+            $alumno = new Alumno();
+            $alumno->setNombre($nombre);
+            $alumno->setApellido($apellido);
+            $alumno->setEmail(strtolower("$nombre.$apellido$i@email.com"));
+
+            $this->addReference("alumno$i", $alumno);
+            $manager->persist($alumno);
+        }
+
         $manager->flush();
     }
 }
