@@ -151,4 +151,19 @@ class Oferta
 
         return $sum;
     }
+
+    /**
+     * @VirtualProperty
+     * @Groups({"stats"})
+     */
+    public function getStatus()
+    {
+        foreach ($this->getComisiones() as $comision) {
+            if ($comision->getStatus() != 'OK') {
+                return 'WARN';
+            }
+        }
+
+        return 'OK';
+    }
 }

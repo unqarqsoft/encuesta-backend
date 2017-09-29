@@ -8,6 +8,7 @@ use FOS\RestBundle\Controller\Annotations\RequestParam;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Context\Context;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use AppBundle\Entity\Encuesta;
 use AppBundle\Entity\Cuatrimestre;
 use AppBundle\Entity\Alumno;
@@ -60,6 +61,10 @@ class EncuestaController extends AbstractRestController
         $cuatrimestre = $paramFetcher->get('cuatrimestre');
 
         $alumno = $this->getRepository(Alumno::class)->findOneByEmail($email);
+        if (!$alumno) {
+            throw new NotFoundHttpException('No existe el alumno');
+        }
+
         $encuesta = $this->getRepository(Encuesta::class)->findOneBy([
             'alumno' => $alumno,
             'cuatrimestre' => $cuatrimestre
