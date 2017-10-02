@@ -26,4 +26,24 @@ class EstadisticaController extends FOSRestController
 
         return $this->handleView($view);
     }
+
+    /**
+     * @Get("/estadisticas/horario")
+     */
+    public function horarioAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $query = $em->createQuery("
+          SELECT m as materia, count(r.id) as total
+          FROM AppBundle:Materia m JOIN AppBundle:Respuesta r WITH r.materia = m.id
+          WHERE r.respuesta = ?1
+          GROUP BY m.id
+          ORDER BY total DESC
+        ");
+        $query->setParameter(1, Respuesta::NO_HORARIO);
+
+        $view = $this->view($query->getResult());
+
+        return $this->handleView($view);
+    }
 }
