@@ -20,7 +20,7 @@ class Carrera
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * @JMS\Groups({"list"})
+     * @JMS\Groups({"list", "stats"})
      */
     private $id;
 
@@ -29,7 +29,7 @@ class Carrera
      *
      * @ORM\Column(name="nombre", type="string", length=255)
      *
-     * @JMS\Groups({"list"})
+     * @JMS\Groups({"list", "stats"})
      */
     private $nombre;
 

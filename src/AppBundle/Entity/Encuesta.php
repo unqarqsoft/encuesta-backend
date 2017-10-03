@@ -5,7 +5,6 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\Groups;
 
 /**
@@ -37,7 +36,7 @@ class Encuesta
     private $token;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cuatrimestre")
+     * @ORM\ManyToOne(targetEntity="Cuatrimestre", inversedBy="encuestas")
      * @Assert\NotBlank()
      *
      * @Groups({"list"})
@@ -59,6 +58,11 @@ class Encuesta
      * @Groups({"list"})
      */
     private $respuestas;
+
+    /**
+     * @ORM\Column(name="completa", type="boolean")
+     */
+    private $completa = false;
 
     public function __construct()
     {
@@ -148,6 +152,12 @@ class Encuesta
         return $this->alumno;
     }
 
+    public function setRespuestas($respuestas)
+    {
+        $this->respuestas = $respuestas;
+        $this->completa = (count($this->respuestas) == count($this->cuatrimestre->getOfertas()));
+    }
+
     /**
      * Add respuesta
      *
@@ -157,7 +167,6 @@ class Encuesta
      */
     public function addRespuesta(\AppBundle\Entity\Respuesta $respuesta)
     {
-        $respuesta->setEncuesta($this);
         $this->respuestas[] = $respuesta;
 
         return $this;
@@ -183,11 +192,8 @@ class Encuesta
         return $this->respuestas;
     }
 
-    /**
-     * @VirtualProperty
-     */
     public function getCompleta()
     {
-        return count($this->respuestas) == count($this->cuatrimestre->getOfertas());
+        return $this->completa;
     }
 }

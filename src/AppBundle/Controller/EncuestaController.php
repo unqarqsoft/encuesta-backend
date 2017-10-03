@@ -88,7 +88,6 @@ class EncuestaController extends AbstractRestController
             $em = $this->getDoctrine()->getManager();
 
             foreach ($respuestas as $respuesta) {
-                $this->get('logger')->info($respuesta->getRespuesta());
                 if (false === $encuesta->getRespuestas()->contains($respuesta)) {
                     $respuesta->setEncuesta(null);
                     $em->remove($respuesta);

@@ -4,7 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Cuatrimestre
@@ -21,7 +21,7 @@ class Cuatrimestre
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * @Groups({"list"})
+     * @JMS\Groups({"list"})
      */
     private $id;
 
@@ -31,7 +31,7 @@ class Cuatrimestre
      * @ORM\Column(name="descripcion", type="string", length=255)
      * @Assert\NotBlank()
      *
-     * @Groups({"list"})
+     * @JMS\Groups({"list", "stats"})
      */
     private $descripcion;
 
@@ -55,7 +55,7 @@ class Cuatrimestre
      * @ORM\ManyToOne(targetEntity="Carrera", inversedBy="cuatrimestres")
      * @Assert\NotBlank()
      *
-     * @Groups({"list"})
+     * @JMS\Groups({"list", "stats"})
      */
     private $carrera;
 
@@ -65,11 +65,19 @@ class Cuatrimestre
     private $ofertas;
 
     /**
+     * @ORM\OneToMany(targetEntity="Encuesta", mappedBy="cuatrimestre")
+     *
+     * @JMS\Exclude
+     */
+    private $encuestas;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->ofertas = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->encuestas = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -210,5 +218,49 @@ class Cuatrimestre
     public function getOfertas()
     {
         return $this->ofertas;
+    }
+
+    /**
+     * Get encuestas
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEncuestas()
+    {
+        return $this->encuestas;
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\Groups({"stats"})
+     */
+    public function getTotalEncuestas()
+    {
+        return count($this->encuestas);
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\Groups({"stats"})
+     */
+    public function getEncuestasCompletas()
+    {
+        return count($this->encuestas->filter(function($e) {
+            return $e->getCompleta();
+        }));
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\Groups({"stats"})
+     */
+    public function getPorcentaje()
+    {
+        $total = $this->getTotalEncuestas();
+        if (!$total) {
+            return 0;
+        }
+
+        return round(($this->getEncuestasCompletas() / $total) * 100, 2);
     }
 }

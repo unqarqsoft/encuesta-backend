@@ -6,9 +6,9 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
-use AppBundle\Entity\Comision;
 use AppBundle\Entity\Respuesta;
 use AppBundle\Entity\Oferta;
+use AppBundle\Entity\Cuatrimestre;
 
 class EstadisticaController extends FOSRestController
 {
@@ -43,6 +43,21 @@ class EstadisticaController extends FOSRestController
         $query->setParameter(1, Respuesta::NO_HORARIO);
 
         $view = $this->view($query->getResult());
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Get("/estadisticas/encuestas")
+     */
+    public function cuatrimestresAction()
+    {
+        $cuatrimestres = $this->getDoctrine()->getRepository(Cuatrimestre::class)->findAll();
+        $view = $this->view($cuatrimestres);
+
+        $context = new Context();
+        $context->addGroup('stats');
+        $view->setContext($context);
 
         return $this->handleView($view);
     }
