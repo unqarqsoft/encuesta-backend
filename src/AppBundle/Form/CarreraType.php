@@ -15,7 +15,7 @@ class CarreraType extends AbstractType
     {
         $builder->add('nombre');
     }
-    
+
     /**
      * {@inheritdoc}
      */

@@ -15,7 +15,7 @@ class ComisionType extends AbstractType
     {
         $builder->add('descripcion');
     }
-    
+
     /**
      * {@inheritdoc}
      */
