@@ -74,6 +74,8 @@ class EncuestaController extends AbstractRestController
             $encuesta = $this->crearEncuesta($alumno, $cuatrimestre);
         }
 
+        $this->sendEncuesta($alumno->getEmail(), $encuesta->getToken());
+
         return $this->handleView($this->view($encuesta));
     }
 
@@ -115,5 +117,17 @@ class EncuestaController extends AbstractRestController
         $em->flush();
 
         return $encuesta;
+    }
+
+    protected function sendEncuesta($email, $token)
+    {
+        $mailer = $this->get('mailer');
+        $message = (new \Swift_Message('Link de encuesta'))
+            ->setFrom('encuestas-preinscripcion@mail.com')
+            ->setTo($email)
+            ->setBody($this->renderView('emails/encuesta.html.twig', array('token' => $token)), 'text/html')
+        ;
+
+        $mailer->send($message);
     }
 }
