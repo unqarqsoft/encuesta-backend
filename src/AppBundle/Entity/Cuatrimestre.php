@@ -245,7 +245,7 @@ class Cuatrimestre
      */
     public function getEncuestasCompletas()
     {
-        return count($this->encuestas->filter(function($e) {
+        return count($this->encuestas->filter(function ($e) {
             return $e->getCompleta();
         }));
     }

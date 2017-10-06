@@ -37,7 +37,7 @@ class Encuesta
 
     /**
      * @ORM\ManyToOne(targetEntity="Cuatrimestre", inversedBy="encuestas")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Cuatrimestre no puede ser vacio")
      *
      * @Groups({"list"})
      */
@@ -45,7 +45,7 @@ class Encuesta
 
     /**
      * @ORM\ManyToOne(targetEntity="Alumno")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Alumno no puede ser vacio")
      *
      * @Groups({"list"})
      */
@@ -155,7 +155,8 @@ class Encuesta
     public function setRespuestas($respuestas)
     {
         $this->respuestas = $respuestas;
-        $this->completa = (count($this->respuestas) == count($this->cuatrimestre->getOfertas()));
+
+        return $this;
     }
 
     /**
@@ -167,6 +168,7 @@ class Encuesta
      */
     public function addRespuesta(\AppBundle\Entity\Respuesta $respuesta)
     {
+        $respuesta->setEncuesta($this);
         $this->respuestas[] = $respuesta;
 
         return $this;
@@ -195,5 +197,12 @@ class Encuesta
     public function getCompleta()
     {
         return $this->completa;
+    }
+
+    public function updateStatus()
+    {
+        $this->completa = (count($this->respuestas) == count($this->cuatrimestre->getOfertas()));
+
+        return $this;
     }
 }

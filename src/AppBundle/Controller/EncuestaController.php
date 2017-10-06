@@ -96,6 +96,7 @@ class EncuestaController extends AbstractRestController
                 }
             }
 
+            $encuesta->updateStatus();
             $em->persist($encuesta);
             $em->flush();
 

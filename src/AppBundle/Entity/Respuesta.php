@@ -34,7 +34,7 @@ class Respuesta
      * @var string
      *
      * @ORM\Column(name="respuesta", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Respuesta no puede ser vacio")
      *
      * @Groups({"list"})
      */
@@ -42,7 +42,7 @@ class Respuesta
 
     /**
      * @ORM\ManyToOne(targetEntity="Materia")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Materia no puede ser vacio")
      *
      * @Groups({"list"})
      */
@@ -58,7 +58,7 @@ class Respuesta
 
     /**
      * @ORM\ManyToOne(targetEntity="Encuesta", inversedBy="respuestas")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Encuesta no puede ser vacio")
      */
     private $encuesta;
 
